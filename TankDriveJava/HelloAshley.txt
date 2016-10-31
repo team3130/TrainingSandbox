@@ -1,1 +1,2 @@
 Hello :) 
+Hi there! Your file got edited. But don't worry, all the edit history is saved at GitHub so any changes can be rolled back, in theory... ;)

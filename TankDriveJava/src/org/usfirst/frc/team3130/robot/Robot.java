@@ -3,6 +3,7 @@ package org.usfirst.frc.team3130.robot;
 
 import edu.wpi.first.wpilibj.SampleRobot;
 import edu.wpi.first.wpilibj.RobotDrive;
+import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Timer;
 
@@ -24,8 +25,11 @@ public class Robot extends SampleRobot {
     RobotDrive myRobot;  // class that handles basic drive operations
     Joystick leftStick;  // set to ID 1 in DriverStation
     Joystick rightStick; // set to ID 2 in DriverStation
+    CANTalon talonL, talonR;
     public Robot() {
-        myRobot = new RobotDrive(0, 1);
+    	talonL = new CANTalon(3);
+    	talonR = new CANTalon(5);
+        myRobot = new RobotDrive(talonL,talonR);
         myRobot.setExpiration(0.1);
         leftStick = new Joystick(0);
         rightStick = new Joystick(1);

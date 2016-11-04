@@ -25,11 +25,13 @@ public class Robot extends SampleRobot {
     RobotDrive myRobot;  // class that handles basic drive operations
     Joystick leftStick;  // set to ID 1 in DriverStation
     Joystick rightStick; // set to ID 2 in DriverStation
-    CANTalon talonL, talonR;
+    CANTalon talonLFront, talonLRear, talonRFront, talonRRear;
     public Robot() {
-    	talonL = new CANTalon(3);
-    	talonR = new CANTalon(5);
-        myRobot = new RobotDrive(talonL,talonR);
+    	talonLFront = new CANTalon(3);
+    	talonLRear = new CANTalon(4);
+    	talonRFront = new CANTalon(5);
+    	talonRRear = new CANTalon(6);
+        myRobot = new RobotDrive(talonLFront,talonLRear,talonRFront,talonRRear);
         myRobot.setExpiration(0.1);
         leftStick = new Joystick(0);
         rightStick = new Joystick(1);

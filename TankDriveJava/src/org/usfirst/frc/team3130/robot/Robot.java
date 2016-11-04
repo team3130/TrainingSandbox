@@ -32,11 +32,7 @@ public class Robot extends SampleRobot {
     	talonR = new CANTalon(5);
     	talonL2 = new CANTalon(4);
     	talonR2 = new CANTalon(6);
-<<<<<<< HEAD
-        myRobot = new RobotDrive(talonL, talonL2, talonR, talonR2);
-=======
         myRobot = new RobotDrive(talonL,talonL2,talonR,talonR2);
->>>>>>> branch 'master' of https://github.com/team3130/TrainingSandbox.git
         myRobot.setExpiration(0.1);
         leftStick = new Joystick(0);
         rightStick = new Joystick(1);

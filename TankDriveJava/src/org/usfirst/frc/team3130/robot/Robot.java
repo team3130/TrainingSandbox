@@ -23,8 +23,7 @@ import edu.wpi.first.wpilibj.Timer;
  */
 public class Robot extends SampleRobot {
     RobotDrive myRobot;  // class that handles basic drive operations
-    Joystick leftStick;  // set to ID 1 in DriverStation
-    Joystick rightStick; // set to ID 2 in DriverStation
+    Joystick driveStick;  // set to ID 1 in DriverStation
     CANTalon talonLFront, talonLRear, talonRFront, talonRRear;
     public Robot() {
     	talonLFront = new CANTalon(3);
@@ -33,8 +32,8 @@ public class Robot extends SampleRobot {
     	talonRRear = new CANTalon(6);
         myRobot = new RobotDrive(talonLFront,talonLRear,talonRFront,talonRRear);
         myRobot.setExpiration(0.1);
-        leftStick = new Joystick(0);
-        rightStick = new Joystick(1);
+        driveStick = new Joystick(1);
+        
     }
 
     
@@ -44,7 +43,7 @@ public class Robot extends SampleRobot {
     public void operatorControl() {
         myRobot.setSafetyEnabled(true);
         while (isOperatorControl() && isEnabled()) {
-        	myRobot.tankDrive(leftStick, rightStick);
+        	myRobot.arcadeDrive(driveStick.getY() * -1 , driveStick.getX());
             Timer.delay(0.005);		// wait for a motor update time
         }
     }

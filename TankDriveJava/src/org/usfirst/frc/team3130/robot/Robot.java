@@ -6,6 +6,9 @@ import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.Joystick.ButtonType;
+import edu.wpi.first.wpilibj.Relay;
+import edu.wpi.first.wpilibj.Relay.Value;
 
 /**
  * This is a demo program showing the use of the RobotDrive class, specifically it 
@@ -25,6 +28,8 @@ public class Robot extends SampleRobot {
     RobotDrive myRobot;  // class that handles basic drive operations
     Joystick driveStick;  // set to ID 1 in DriverStation
     CANTalon talonLFront, talonLRear, talonRFront, talonRRear;
+    Relay headlight;
+    
     public Robot() {
     	talonLFront = new CANTalon(3);
     	talonLRear = new CANTalon(4);
@@ -34,6 +39,7 @@ public class Robot extends SampleRobot {
         myRobot.setExpiration(0.1);
         driveStick = new Joystick(1);
         
+        headlight = new Relay(3);
     }
 
     
@@ -43,6 +49,7 @@ public class Robot extends SampleRobot {
     public void operatorControl() {
         myRobot.setSafetyEnabled(true);
         while (isOperatorControl() && isEnabled()) {
+        	else headlight.set(Value.kOff);
         	myRobot.arcadeDrive(driveStick.getY() * -1 , driveStick.getX());
             Timer.delay(0.005);		// wait for a motor update time
         }

@@ -30,7 +30,8 @@ public class Robot extends SampleRobot {
     Joystick driveStick;  // set to ID 1 in DriverStation
     CANTalon talonLFront, talonLRear, talonRFront, talonRRear;
     Relay flashlight; 
-  
+
+    
     public Robot() {
     	talonLFront = new CANTalon(3);
     	talonLRear = new CANTalon(4);

@@ -5,7 +5,12 @@ import edu.wpi.first.wpilibj.SampleRobot;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.Joystick.ButtonType;
+import edu.wpi.first.wpilibj.Relay;
+import edu.wpi.first.wpilibj.Relay.Value;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
+
 
 /**
  * This is a demo program showing the use of the RobotDrive class, specifically it 
@@ -25,6 +30,11 @@ public class Robot extends SampleRobot {
     RobotDrive myRobot;  // class that handles basic drive operations
     Joystick driveStick;  // set to ID 1 in DriverStation
     CANTalon talonLFront, talonLRear, talonRFront, talonRRear;
+
+    Relay flashlight; 
+
+
+    
     public Robot() {
     	talonLFront = new CANTalon(3);
     	talonLRear = new CANTalon(4);
@@ -33,17 +43,26 @@ public class Robot extends SampleRobot {
         myRobot = new RobotDrive(talonLFront,talonLRear,talonRFront,talonRRear);
         myRobot.setExpiration(0.1);
         driveStick = new Joystick(1);
-        
-    }
+        flashlight = new Relay(3);
 
+    }
     
     /**
      * Runs the motors with tank steering.
      */
     public void operatorControl() {
+    	
         myRobot.setSafetyEnabled(true);
         while (isOperatorControl() && isEnabled()) {
-        	myRobot.arcadeDrive(driveStick.getY() * -1 , driveStick.getX());
+
+        	myRobot.arcadeDrive(driveStick.getY() * -1 , -1 * driveStick.getX());
+        	if (driveStick.getButton(ButtonType.kTrigger)) {
+        		flashlight.set(Value.kForward);
+        	}
+        	else {
+        		flashlight.set(Value.kOff);
+        	}
+
             Timer.delay(0.005);		// wait for a motor update time
         }
     }
